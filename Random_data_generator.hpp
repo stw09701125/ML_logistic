@@ -4,8 +4,8 @@
 using namespace std;
 
 
-#ifndef RDG
-#define RDG
+#ifndef RG
+#define RG
 
 double RDG(double mean, double var)
 {
@@ -59,25 +59,6 @@ double linear_model_RDG(int basis_num, double var_of_bias, vector<double> weight
 	return y;
 }
 
-void sequential_estimate(const double& real_mean, const double& real_var, double mean, double var, int n = 2)
-{
-	double data = RDG(real_mean, real_var);
-	double new_mean = mean + (data - mean) / n;
-	double new_var = (n - 2) * var / (n - 1) + pow((data - mean), 2) / n;
-	cout << "===========================" << endl;
-	cout << "The " << n << "th time: " << endl;
-	cout << "Data point: " << data << endl;
-	cout << "Mean: " << new_mean << endl;
-	cout << "Var: " << new_var << endl;
-	if (pow((new_mean - mean), 2) < 0.0001 && pow((new_var - var), 2) < 0.000001)
-	{
-		return;
-	}
-	else
-	{
-		sequential_estimate(real_mean, real_var, new_mean, new_var, n + 1);
-	}
-}
 
 #endif
 

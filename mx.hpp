@@ -151,7 +151,33 @@ class Matrix
 			}
 			return *this;
 		}
+
+		Matrix<T>& operator=(const vector<T> & v)
+		{
+			row = 1;
+			col = v.size();
+			{
+				vector<vector<T>> temp;
+				matrix = move(temp);
+			}
+			matrix.resize(1);
+			matrix[0].assign(v.begin(), v.end());
+			return *this;
+		}
 		
+		Matrix<T>& operator=(const vector<T> && v)
+		{
+			row = 1;
+			col = v.size();
+			{
+				vector<vector<T>> temp;
+				matrix = move(temp);
+			}
+			matrix.resize(1);
+			matrix[0] = move(v);
+			return *this;
+		}
+
 		Matrix<T> operator+(const Matrix<T> & m)
 		{
 			if (row == m.row && col == m.col)
