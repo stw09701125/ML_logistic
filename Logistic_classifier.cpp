@@ -155,8 +155,10 @@ void learn_w(Matrix<double>& w, Matrix<double>& phi, Matrix<double>& t)
 	|  Wn+1 = Wn - (hessian(Wn))^-1 * gradient(Wn)                   |
 	| 													             |
 	|  gradient(Wn) = phi^T * (logistic(phi * w^T) - t)              |
-	|  hessian(Wn) = phi^T * R * phi                                 |
+	|  hessian(Wn) = phi^T * R * phi								 |	
+	|  R is a diagonal matrix										 |
 	|  R ==> Rii = logistic(phi * w^T)i * (1 - logistic(phi * w^T)i) | 
+	|																 |	
 	*****************************************************************/
 	
 	while(1)
