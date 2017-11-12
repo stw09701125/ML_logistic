@@ -15,9 +15,13 @@ class Matrix
 	protected:
 		int row;
 		int col;
-		vector<vector<T>> matrix;
+		vector< vector<T> > matrix;
 	public:
-		Matrix(){}
+		Matrix()
+		{
+			row = 0;
+			col = 0;
+		}
 		
 		Matrix(const int r)
 		{
@@ -42,7 +46,7 @@ class Matrix
 			}
 		}
 		
-		Matrix(const vector<vector<T>>& v)
+		Matrix(const vector< vector<T> >& v)
 		{
 			row = v.size();
 			col = v[0].size();
@@ -53,7 +57,7 @@ class Matrix
 			}
 		}
 
-		Matrix(const vector<vector<T>> && v)
+		Matrix(const vector< vector<T> > && v)
 		{
 			row = v.size();
 			col = v[0].size();
@@ -120,7 +124,7 @@ class Matrix
 			return *this;
 		}
 		
-		Matrix<T>& operator=(const vector<vector<T>> & v)
+		Matrix<T>& operator=(const vector< vector<T> > & v)
 		{
 			row = v.size();
 			col = v[0].size();
@@ -136,7 +140,7 @@ class Matrix
 			return *this;
 		}
 		
-		Matrix<T>& operator=(const vector<vector<T>> && v)
+		Matrix<T>& operator=(const vector< vector<T> > && v)
 		{
 			row = v.size();
 			col = v[0].size();
@@ -337,6 +341,37 @@ class Matrix
 			}
 		}
 		
+		T det()
+		{
+			if (row == 2)
+			{
+				return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+			}
+
+			T val = 0;
+
+			for (int r = 0; r < row; ++r)
+			{
+				Matrix<T> cofactor;
+				for (int i = 0; i < row; ++i)
+				{
+					if (i != r)
+					{
+						vector<T> temp;
+						for(int c = 1; c < col; ++c)
+						{
+							temp.push_back(matrix[i][c]);
+						}
+						cofactor.append(temp);
+					}
+				}
+				// r % 2 == 0 ---> "+" else ----> "-"
+				val += ((r & 1) ? -1 : 1) * cofactor.det() * matrix[r][0];
+			}
+
+			return val;
+		}
+
 		T get_value(const int r, const int c)
 		{
 			if (r > row - 1 || c > col - 1)
@@ -361,9 +396,20 @@ class Matrix
 				matrix[r][c] = n; 
 			}		
 		}
+
+		void append(vector<T>& v)
+		{
+			row += 1;
+			if (v.size() != col && col != 0)
+			{
+				cerr << "size of vec does not fit matrix colunm" << endl;
+			}
+			else { col = v.size(); }
+			matrix.emplace_back(move(v));	
+		}
 		
-		int get_row() const {return row;}
-		int get_col() const {return col;}
+		int get_row() const { return row; }
+		int get_col() const { return col; }
 		
 		void printout(ostream& output)
 		{
