@@ -137,28 +137,28 @@ void learn_w(Matrix<double>& w, Matrix<double>& phi, Matrix<double>& t)
 	// t = [t0, t1, t2, ..., tn]^T //
 
 	/**************************************
-	|									  |
-	|		 1 x0 x0^2 ... y0 y0^2 ...    |
-	| 		 1 x1 x1^2 ... y1 y1^2 ...    |
+	|			   	      |
+	|	 1 x0 x0^2 ... y0 y0^2 ...    |
+	| 	 1 x1 x1^2 ... y1 y1^2 ...    |
 	|   	 1 x2 x2^2 ... y2 y2^2 ...    |
-	| phi =	 .							  |
-	|		 .							  |
-	|		 .							  |
-	|		 1 xn xn^2 ... yn yn^2 ...    |
-	|									  |
+	| phi =	 .		              |
+	|        .			      |
+	|	 .			      |
+	|	 1 xn xn^2 ... yn yn^2 ...    |
+	|			              |
 	**************************************/
 
 	/**************** learning (training) process ********************
-	|  													             |		
+	|  							         |		
 	|  update our linear model --> update "W"                        |
 	|  Wn+1 = Wn - gradient(Wn) or                                   |
 	|  Wn+1 = Wn - (hessian(Wn))^-1 * gradient(Wn)                   |
-	| 													             |
+	| 						                 |
 	|  gradient(Wn) = phi^T * (logistic(phi * w^T) - t)              |
-	|  hessian(Wn) = phi^T * R * phi								 |	
-	|  R is a diagonal matrix										 |
+	|  hessian(Wn) = phi^T * R * phi				 |	
+	|  R is a diagonal matrix					 |
 	|  R ==> Rii = logistic(phi * w^T)i * (1 - logistic(phi * w^T)i) | 
-	|																 |	
+	|							         |	
 	*****************************************************************/
 	
 	while(1)
