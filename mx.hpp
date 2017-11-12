@@ -199,7 +199,7 @@ class Matrix
 			else
 			{
 				Matrix<T> temp;
-				cerr << "The dimension of the two matrixes does not fit." << endl;
+				cerr << "The dimension of the two matrixes does not fit for +." << endl;
 				return temp;
 			}
 		}
@@ -221,7 +221,7 @@ class Matrix
 			else
 			{
 				Matrix<T> temp;
-				cerr << "The dimension of the two matrixes does not fit." << endl;
+				cerr << "The dimension of the two matrixes does not fit for -." << endl;
 				return temp;
 			}
 		}
@@ -256,7 +256,7 @@ class Matrix
 			else
 			{
 				Matrix<T> temp;
-				cerr << "The dimension of the two matrixes dose not fit." << endl;
+				cerr << "The dimension of the two matrixes dose not fit for *." << endl;
 				return temp;
 			}
 		}
@@ -273,7 +273,7 @@ class Matrix
 			return *this;
 		}
 		
-		Matrix<T>& transpose()
+		Matrix<T> transpose()
 		{
 			Matrix<T> temp(col, row);
 			for (int i(0); i < row; ++i)
@@ -283,8 +283,8 @@ class Matrix
 					temp.matrix[j][i] = matrix[i][j];
 				}
 			}
-			*this = move(temp);
-			return *this;
+			//*this = move(temp);
+			return temp;
 		}
 		
 		Matrix<double>& inverse()
